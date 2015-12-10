@@ -106,7 +106,6 @@ public class SuperArray  {
 	public int linSearch (Comparable x){
 		int index = -1;
 			for (int i = 0; _data[i] instanceof Comparable; i++){
-				System.out.println ("The Comprable is + " + _data[i]);
 				if(x.compareTo(_data[i]) == 0){
 					index = i;
 				}
