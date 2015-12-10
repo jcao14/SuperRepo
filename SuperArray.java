@@ -106,15 +106,15 @@
 	public int linSearch (Comparable x){
 		int index = -1;
 			for (int i = 0; i < _data.length; i++){
-				if(x.compareTo (_data[i]) == 0){
+				if(x.compareTo(_data[i]) == 0){
 					index = i;
 				}
 			}
 		return index;}
 
 	public boolean isSorted() {
-		for (i=1; i <_data.length; i++){
-			if (!(_data[counter -1],compareTo (_data[counter]) < 0)){
+		for (int i=1; i <_data.length; i++){
+			if (!(_data[i -1].compareTo (_data[i]) < 0)){
 				return false;
 			}
 		}
