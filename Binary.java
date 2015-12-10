@@ -158,6 +158,14 @@ public class Binary implements Comparable {
       =============================================*/
     
     public int compareTo( Object o ) {
+      if (!(o instanceof Comparable)) {
+        throw new ClassCastException("Argument to compareTo is not " + 
+              "an instanceof Comparable");
+      }
+      
+      if (o == null) {
+        throw new NullPointerException ("NULLWAYYYYYY");
+      }
 
        if (o instanceof Binary ) {
           Binary other = (Binary) o;
@@ -176,7 +184,7 @@ public class Binary implements Comparable {
      
         }
         
-        else if (o instanceof Rational){
+        else {
          Rational other = (Rational) o;
          if (other.getNum() % other.getDem() != 0){
            return -1;
@@ -190,9 +198,10 @@ public class Binary implements Comparable {
         }
         }
         
-        
+        /*
           throw new ClassCastException("Argument to compareTo is not " + o +
-              "an instanceof Comparable");
+              "an instanceof Comparable"); 
+              */
     }
       
   

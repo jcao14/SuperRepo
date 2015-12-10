@@ -1,4 +1,4 @@
-﻿public class SuperArray implements ListInt {
+﻿public class SuperArray  {
 
     //~~~~~INSTANCE VARS~~~~~
     //underlying container, or "core" of this data structure:
@@ -110,11 +110,20 @@
 					index = i;
 				}
 			}
-		return -1;}
+		return index;}
 
+	public boolean isSorted() {
+		for (i=1; i <_data.length; i++){
+			if (!(_data[counter -1],compareTo (_data[counter]) < 0)){
+				return false;
+			}
+		}
+		return true;
+	}
 
-		
-		
+    
+
+	
 	
 	
 		
@@ -123,59 +132,55 @@
     public static void main( String[] args ) {
 	
 
-	ListInt leche = new SuperArray();
-	System.out.println("Printing empty LastInt leche...");
-	System.out.println(leche);
-
-	Rational a = new Rational (5,10);
-	Binary b = new Binary (10);
-	Hexadecimal c = new Hexadecimal("F");
-	Binary d = new Binary ("1110");
-	Hexadecimal e = new Hexadecimal ("31");
+	SuperArray mayfield = new SuperArray();
+	//===============================================//
 	
-	leche.add(a);
-	leche.add(b);
-	leche.add(c);
-	leche.add(d);
-	leche.add(e);
+	System.out.println("Printing empty SuperArray mayfield...");
+	System.out.println(mayfield);
 
-	System.out.println("Printing populated ListInt leche...");
-	System.out.println(leche);
+	//Test Add Methods
+	mayfield.add(new Rational (5, 1));
+	mayfield.add(new Binary (8));
+	mayfield.add(new Hexadecimal (16));
+	mayfield.add(new Binary (56));
+	mayfield.add(new Rational (6, 2));
 
-	leche.remove(3);
-	System.out.println("Printing ListInt leche post-remove...");
-	System.out.println(leche);
-	leche.remove(3);
-	System.out.println("Printing ListInt leche post-remove...");
-	System.out.println(leche);
-
-	Binary f = new Binary ("0");
-	Hexadecimal g = new Hexadecimal("2F");
-	Rational h = new Rational (1,3);
 	
-	leche.add(3,f);
-	System.out.println("Printing ListInt leche post-insert...");
-	System.out.println(leche);
-	leche.add(1,g);
-	System.out.println("Printing ListInt leche post-insert...");
-	System.out.println(leche);
-	leche.add(1,h);
-	System.out.println("Printing ListInt leche post-insert...");
-	System.out.println(leche);
-
-	System.out.println("Printing value at index 2");
-	System.out.println(leche.get(2));
-
-	Hexadecimal i = new Hexadecimal ("A");
-	System.out.println("Setting value at index 2 to A");
-	leche.set(2,i);
-	System.out.println(leche);
-
-	System.out.println("Printing the size of leche");
-	System.out.println(leche.size());
 	
-	Comparable j = new Binary (64);
-	System.out.println(leche.linSearch(j));
+	System.out.println("Printing populated SuperArray mayfield...");
+	System.out.println(mayfield);
+	
+	
+	//Test Remove Method
+	mayfield.remove(3);
+	System.out.println("Printing ListInt mayfield post-remove...");
+	System.out.println(mayfield);
+	mayfield.remove(3);
+	System.out.println("Printing ListInt mayfield post-remove...");
+	System.out.println(mayfield); 
+
+	
+	//Test Add-at-Index
+	mayfield.add(2,new Binary (56));
+	System.out.println("Printing ListInt mayfield post-insert...");
+	System.out.println(mayfield);
+	mayfield.add(2,new Binary (58));
+	System.out.println("Printing ListInt mayfield post-insert...");
+	System.out.println(mayfield);
+	mayfield.add(1,new Binary (57));
+	System.out.println("Printing ListInt mayfield post-insert...");
+	System.out.println(mayfield);
+	
+	
+	//Test Size 
+	System.out.println("Printing ListInt mayfield size");
+	System.out.println (mayfield.size());
+	
+	//isSorted Test
+
+
+	//linSearch Test
+	System.out.println (mayfield.linSearch (new Binary(8)));
 
     }//end main
 

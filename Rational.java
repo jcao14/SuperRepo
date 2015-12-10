@@ -106,15 +106,15 @@ public class Rational implements Comparable{
      
      
     public int compareTo( Object o ) {
-    
-       if (o instanceof Rational ) {
-          Rational other = (Rational) o;
-          int diff = this.numerator*other.denominator - other.numerator*this.denominator;
-           if (diff == 0){
-                return 0;
-             }
-            return -1;
-       }
+     if (!(o instanceof Comparable)) {
+        throw new ClassCastException("Argument to compareTo is not " + 
+              "an instanceof Comparable");
+      }
+      
+      if (o == null) {
+        throw new NullPointerException ("NULLWAYYYYYY");
+      }
+      
 
        if ((numerator % denominator == 0) ){
             int a = numerator / denominator;
@@ -139,10 +139,16 @@ public class Rational implements Comparable{
         }
            
        }
-        
-        throw new ClassCastException("Argument to compareTo is not " +
-              "an instanceof Comparable");
-          
+       
+        else  {
+          Rational other = (Rational) o;
+          int diff = this.numerator*other.denominator - other.numerator*this.denominator;
+           if (diff == 0){
+                return 0;
+             }
+            return -1;
+       }
+        return -1;
         
     }
       

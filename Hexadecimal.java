@@ -159,6 +159,14 @@ public class Hexadecimal implements Comparable {
       
  
     public int compareTo( Object o ) {
+      if (!(o instanceof Comparable)) {
+      throw new ClassCastException("Argument to compareTo is not " +
+              "an instanceof Comparable");
+      }
+      
+      if (o == null) {
+        throw new NullPointerException ("NULLWAYYYYYY");
+      }
     
        if (o instanceof Hexadecimal ) {
           Hexadecimal other = (Hexadecimal) o;
@@ -177,7 +185,7 @@ public class Hexadecimal implements Comparable {
          
         }
         
-      else if (o instanceof Rational){
+      else {
          Rational other = (Rational) o;
          if (other.getNum() % other.getDem() != 0){
            return -1;
@@ -192,9 +200,6 @@ public class Hexadecimal implements Comparable {
         
       }
         
-        throw new ClassCastException("Argument to compareTo is not " +
-              "an instanceof Comparable");
-          
         }
          
     
