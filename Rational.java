@@ -40,6 +40,14 @@ public class Rational implements Comparable{
 	    System.out.println("Cannot divide by 0.");
     	}
     }
+    
+    public int getNum(){
+        return numerator;
+    }
+    
+    public int getDem(){
+        return denominator;
+    }
 
   /*=====================PHASE 2=====================*/
 
@@ -95,23 +103,51 @@ public class Rational implements Comparable{
 	     return gcdER (b , (a-b));
 	 }
      }
-
-    public int compareTo (Rational o){
-	int diff = this.numerator*o.denominator - o.numerator*this.denominator;
-	if (diff > 0){
-            return 1;
-        }
-	else if (diff == 0){
-            return 0;
-        }
-        else{
-	    return -1;
-	}
-    }
+     
+     
+    public int compareTo( Object o ) {
     
-    public int compareTo (Object o){
-	return this.compareTo((Rational)o);
+       if (o instanceof Rational ) {
+          Rational other = (Rational) o;
+          int diff = this.numerator*other.denominator - other.numerator*this.denominator;
+           if (diff == 0){
+                return 0;
+             }
+            return -1;
+       }
+
+       if ((numerator % denominator == 0) ){
+            int a = numerator / denominator;
+   
+           
+        if (o instanceof Hexadecimal ) {
+          Hexadecimal thisH = new Hexadecimal (a);
+          Hexadecimal other = (Hexadecimal) o;
+          
+          if (thisH.getDecH() == other.getDecH() ) {
+            return 0;}
+            return -1;
+        }
+        
+          if (o instanceof Binary ) {
+          Binary thisB = new Binary (a);
+          Binary other = (Binary) o;
+          if (thisB.getDecB() == other.getDecB()) {
+            return 0;}
+            return -1;
+          
+        }
+           
+       }
+        
+        throw new ClassCastException("Argument to compareTo is not " +
+              "an instanceof Comparable");
+          
+        
     }
+      
+
+    
 
 
     /*=====================PHASE 4=====================*/
@@ -125,12 +161,12 @@ public class Rational implements Comparable{
 
     public static void main(String[] args) {
         Rational r = new Rational(1, 1);
-        Rational s = new Rational(7, 20);
+        Hexadecimal s = new Hexadecimal("F");
 	Rational t = new Rational(14, 40);
 	System.out.println ("Fraction 1:\t" + r);
 	System.out.println ("Fraction 2:\t"+ s);
 	System.out.println ("Fraction 3:\t" +t);
-        System.out.println("Comparing Fraction 2 to Fraction 1:\t" + s.compareTo(r)); //should return -13
+    System.out.println("Comparing Fraction 2 to Fraction 1:\t" + r.compareTo(s)); //should return -13
 	System.out.println("Checking to see if Fraction 2 is equal to Fraction 1\t" + s.equals(r)); // should return false
 	System.out.println("Checking to see if Fraction 2 is equal to Fraction 3\t" + s.equals(t)); //should return true
     }

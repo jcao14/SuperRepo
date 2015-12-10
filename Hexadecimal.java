@@ -1,4 +1,4 @@
-public class Hexadecimal {
+public class Hexadecimal implements Comparable {
 
     private int _decNum;
     private String _hexNum;
@@ -46,6 +46,10 @@ public class Hexadecimal {
       =====================================*/
     public String toString() { 
 	return this._hexNum;  
+    }
+    
+    public int getDecH(){
+      return _decNum;
     }
 
 
@@ -152,15 +156,57 @@ public class Hexadecimal {
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
+      
  
-    public int compareTo( Object other ) {
-        if (other instanceof Hexadecimal ) {
-            Hexadecimal o = (Hexadecimal)other;
-            return _decNum - o._decNum;
+    public int compareTo( Object o ) {
+    
+       if (o instanceof Hexadecimal ) {
+          Hexadecimal other = (Hexadecimal) o;
+          if (this._decNum == other._decNum) {
+            return 0;}
+             return -1;
         }
+        
+      else if (o instanceof Binary){
+        Binary thisB = new Binary (this._decNum);
+        Binary other = (Binary) o;
+        
+        if (thisB.getDecB() == other.getDecB()) {
+            return 0;}
+             return -1;
+         
+        }
+        
+      else if (o instanceof Rational){
+         Rational other = (Rational) o;
+         if (other.getNum() % other.getDem() != 0){
+           return -1;
+         }
+         else{
+           Hexadecimal otherH = new Hexadecimal (other.getNum() / other.getDem());
+            if (this._decNum == otherH._decNum) {
+              return 0;}
+              return -1;
+          
+        }
+        
+      }
+        
         throw new ClassCastException("Argument to compareTo is not " +
-            "an instanceof Hexadecimal");
-    }
+              "an instanceof Comparable");
+          
+        }
+         
+    
+        
+      
+      
+        
+      
+        
+    
+      
+  
       
 
     //main method for testing
@@ -170,19 +216,15 @@ public class Hexadecimal {
 	System.out.println();
 	System.out.println( "Testing ..." );
 
-	Hexadecimal b1 = new Hexadecimal(31);
-	Hexadecimal b2 = new Hexadecimal(31);
+	Hexadecimal b1 = new Hexadecimal(1);
+	Binary b2 = new Binary(31);
 	Hexadecimal b3 = b1;
-	Hexadecimal b4 = new Hexadecimal(15);
+	Rational b4 = new Rational (5,1);
 
 	System.out.println( b1 );
 	System.out.println( b2 );
 	System.out.println( b3 );       
 	System.out.println( b4 );       
-
-	System.out.println( "\n==..." );
-	System.out.println( b1 == b2 ); //should be false
-	System.out.println( b1 == b3 ); //should be true
 
 	System.out.println( "\n.equals()..." );
 	System.out.println( b1.equals(b2) ); //should be true
@@ -192,10 +234,9 @@ public class Hexadecimal {
 	System.out.println( b1.equals(b4) ); //should be false
 
 	System.out.println( "\n.compareTo..." );
-	System.out.println( b1.compareTo(b2) ); //should be 0
-	System.out.println( b1.compareTo(b3) ); //should be 0
+
 	System.out.println( b1.compareTo(b4) ); //should be pos
-	System.out.println( b4.compareTo(b1) ); //should be neg
+
 
     }//end main()
 

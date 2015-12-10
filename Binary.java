@@ -1,4 +1,4 @@
-public class Binary {
+public class Binary implements Comparable {
 
     private int _decNum;
     private String _binNum;
@@ -45,6 +45,10 @@ public class Binary {
       =====================================*/
     public String toString() { 
 	return this._binNum;  
+    }
+
+    public int getDecB(){
+      return _decNum;
     }
 
 
@@ -152,18 +156,46 @@ public class Binary {
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
- 
-    public int compareTo( Object other ) {
-      Binary o = (Binary)other;
-      if (this._decNum == o._decNum) {
-        return 0;}
-      else if (this._decNum < o._decNum){
-        return 9001;}
-      else {
-        return -9001;}
+    
+    public int compareTo( Object o ) {
+
+       if (o instanceof Binary ) {
+          Binary other = (Binary) o;
+          if (this._decNum == other._decNum) {
+            return 0;}
+           return -1;
+        }
+        
+        else if (o instanceof Hexadecimal){
+        Hexadecimal thisH = new Hexadecimal (this._decNum);
+        Hexadecimal other = (Hexadecimal) o;
+        
+        if (thisH.getDecH() == other.getDecH()) {
+            return 0;}
+           return -1;
+     
+        }
+        
+        else if (o instanceof Rational){
+         Rational other = (Rational) o;
+         if (other.getNum() % other.getDem() != 0){
+           return -1;
+         }
+         
+         else{
+           Binary otherB = new Binary (other.getNum() / other.getDem());
+            if (this._decNum == otherB._decNum) {
+            return 0;}
+            return -1;
+        }
+        }
+        
+        
+          throw new ClassCastException("Argument to compareTo is not " + o +
+              "an instanceof Comparable");
     }
       
-
+  
     //main method for testing
     public static void main( String[] args ) {
 
@@ -172,18 +204,16 @@ public class Binary {
 	System.out.println( "Testing ..." );
 
 	Binary b1 = new Binary(5);
-	Binary b2 = new Binary(5);
+	Hexadecimal b2 = new Hexadecimal(65);
 	Binary b3 = b1;
-	Binary b4 = new Binary(7);
+	Rational b4 = new Rational(10,3);
 
 	System.out.println( b1 );
 	System.out.println( b2 );
 	System.out.println( b3 );       
 	System.out.println( b4 );       
 
-	System.out.println( "\n==..." );
-	System.out.println( b1 == b2 ); //should be false
-	System.out.println( b1 == b3 ); //should be true
+
 
 	System.out.println( "\n.equals()..." );
 	System.out.println( b1.equals(b2) ); //should be true
@@ -191,13 +221,12 @@ public class Binary {
 	System.out.println( b3.equals(b1) ); //should be true
 	System.out.println( b4.equals(b2) ); //should be false
 	System.out.println( b1.equals(b4) ); //should be false
-/*=========================================
+
 	System.out.println( "\n.compareTo..." );
 	System.out.println( b1.compareTo(b2) ); //should be 0
-	System.out.println( b1.compareTo(b3) ); //should be 0
-	System.out.println( b1.compareTo(b4) ); //should be neg
-	System.out.println( b4.compareTo(b1) ); //should be pos
-	  =========================================*/
+	System.out.println( b1.compareTo(b4) ); //should be 0
+
+
     }//end main()
 
 } //end class
