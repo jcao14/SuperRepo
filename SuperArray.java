@@ -114,7 +114,7 @@ public class SuperArray  {
 		return index;}
 
 	public boolean isSorted() {
-		for (int i=1; i <_data.length; i++){
+		for (int i=1; _data[i] instanceof Comparable; i++){
 			if (!(_data[i -1].compareTo (_data[i]) < 0)){
 				return false;
 			}
@@ -182,6 +182,7 @@ public class SuperArray  {
 
 	//linSearch Test
 	System.out.println (mayfield.linSearch (new Binary(8)));
+	System.out.println( mayfield.isSorted());
 
     }//end main
 
